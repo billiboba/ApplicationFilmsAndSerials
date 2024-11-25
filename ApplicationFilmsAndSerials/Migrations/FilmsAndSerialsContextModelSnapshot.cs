@@ -33,9 +33,8 @@ namespace ApplicationFilmsAndSerials.Migrations
                     b.Property<int>("AgeLimit")
                         .HasColumnType("int");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
@@ -47,9 +46,32 @@ namespace ApplicationFilmsAndSerials.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("VideoPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("GenreId");
+
                     b.ToTable("Films");
+                });
+
+            modelBuilder.Entity("ApplicationFilmsAndSerials.Models.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("ApplicationFilmsAndSerials.Models.Serials", b =>
@@ -69,9 +91,11 @@ namespace ApplicationFilmsAndSerials.Migrations
                     b.Property<int>("CountOfSeasons")
                         .HasColumnType("int");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("EpisodeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
@@ -79,11 +103,20 @@ namespace ApplicationFilmsAndSerials.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("SeasonNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("VideoPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Serials");
                 });
@@ -107,9 +140,42 @@ namespace ApplicationFilmsAndSerials.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("ApplicationFilmsAndSerials.Models.Films", b =>
+                {
+                    b.HasOne("ApplicationFilmsAndSerials.Models.Genre", "Genre")
+                        .WithMany("Films")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("ApplicationFilmsAndSerials.Models.Serials", b =>
+                {
+                    b.HasOne("ApplicationFilmsAndSerials.Models.Genre", "Genre")
+                        .WithMany("Serials")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("ApplicationFilmsAndSerials.Models.Genre", b =>
+                {
+                    b.Navigation("Films");
+
+                    b.Navigation("Serials");
                 });
 #pragma warning restore 612, 618
         }

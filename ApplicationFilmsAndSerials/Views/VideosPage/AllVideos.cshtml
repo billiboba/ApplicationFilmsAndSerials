@@ -1,0 +1,38 @@
+﻿@model List<ApplicationFilmsAndSerials.Models.Films>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Movies</h1>
+        <div class="row">
+            @foreach (var film in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <video controls class="card-img-top">
+                            <source src="@film.VideoPath" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">@film.Title</h5>
+                            <p class="card-text">
+                                Release Date: @film.ReleaseDate.ToString("yyyy-MM-dd")<br>
+                                Genre: @film.Genre.Name<br>
+                                Age Limit: @film.AgeLimit+<br>
+                                Rating: @film.Rating
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

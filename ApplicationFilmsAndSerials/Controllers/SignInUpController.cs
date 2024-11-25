@@ -16,8 +16,13 @@ namespace ApplicationFilmsAndSerials.Controllers
         {
             return View("~/Views/HomePage/Authentication.cshtml");
         }
-        public IActionResult SignUp(string name, string email, DateTime dayOfBirthday)
+        public IActionResult SignUp(string name, string email,string password, DateTime dayOfBirthday)
         {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ViewBag.ErrorMessage = "Name cannot be empty.";
+                return View("~/Views/HomePage/Authentication.cshtml");
+            }
             var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
             if (existingUser != null)
             {
@@ -28,12 +33,29 @@ namespace ApplicationFilmsAndSerials.Controllers
             {
                 Name = name,
                 Email = email,
-                DayOfBirthday = dayOfBirthday
+                DayOfBirthday = dayOfBirthday,
+                Password = password
             };
             _context.Users.Add(user); 
             _context.SaveChanges(); 
 
-            return RedirectToAction("MainPage", "MainPage");
+            return RedirectToAction("MainPage", "Videos");
+        }
+        public IActionResult SignIn(string email, string password)
+        {
+            var existingUser = _context.Users.FirstOrDefault(u => u.Email == email);
+            if (existingUser == null)
+            {
+                ViewBag.ErrorMessage = "User with this email does not exist.";
+                return View("~/Views/HomePage/Authentication.cshtml");
+            }
+            if (existingUser.Password != password)
+            {
+                ViewBag.ErrorMessage = "Incorrect password. Please try again.";
+                return View("~/Views/HomePage/Authentication.cshtml");
+            }
+
+            return RedirectToAction("MainPage", "Videos");
         }
     }
 }

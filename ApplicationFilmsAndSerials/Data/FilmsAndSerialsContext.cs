@@ -10,6 +10,7 @@ namespace ApplicationFilmsAndSerials.Data
         public DbSet<User>Users { get; set; }
         public DbSet<Films> Films { get; set; }
         public DbSet<Serials> Serials { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
     }
 }

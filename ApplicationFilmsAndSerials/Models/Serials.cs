@@ -9,6 +9,10 @@
         public DateTime ReleaseDate { get; set; }
         public int AgeLimit { get; set; }
         public double Rating { get; set; }
-        public string Genre { get; set; }
+        public int GenreId { get; set; }
+        public Genre Genre { get; set; }
+        public int SeasonNumber { get; set; }
+        public int EpisodeNumber { get; set; }
+        public string VideoPath { get; set; }
     }
 }
