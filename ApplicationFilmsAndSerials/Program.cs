@@ -16,10 +16,15 @@ using (var scope = app.Services.CreateScope())
     var csvService = scope.ServiceProvider.GetRequiredService<CsvImportService>();
 
     // ”кажите путь к вашему CSV файлу
-    var csvPath = Path.Combine("wwwroot", "CSVDataVideos", "movies.csv");
-    if (File.Exists(csvPath))
+    var csvPathFilms = Path.Combine("wwwroot", "CSVDataVideos", "movies.csv");
+    if (File.Exists(csvPathFilms))
     {
-        csvService.ImportFilmsFromCsv(csvPath);
+        csvService.ImportFilmsFromCsv(csvPathFilms);
+    }
+    var csvPathSerials = Path.Combine("wwwroot", "CSVDataVideos", "serials.csv");
+    if (File.Exists(csvPathSerials))
+    {
+        csvService.ImportSerialsFromCsv(csvPathSerials);
     }
 }
 if (!app.Environment.IsDevelopment())

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationFilmsAndSerials.Migrations
 {
     [DbContext(typeof(FilmsAndSerialsContext))]
-    [Migration("20241125175953_InitialCreate")]
+    [Migration("20241125193011_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -86,12 +86,6 @@ namespace ApplicationFilmsAndSerials.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AgeLimit")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountOfEpisodes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountOfSeasons")
                         .HasColumnType("int");
 
                     b.Property<int>("EpisodeNumber")

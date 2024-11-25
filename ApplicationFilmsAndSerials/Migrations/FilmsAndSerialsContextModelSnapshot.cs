@@ -85,12 +85,6 @@ namespace ApplicationFilmsAndSerials.Migrations
                     b.Property<int>("AgeLimit")
                         .HasColumnType("int");
 
-                    b.Property<int>("CountOfEpisodes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountOfSeasons")
-                        .HasColumnType("int");
-
                     b.Property<int>("EpisodeNumber")
                         .HasColumnType("int");
 

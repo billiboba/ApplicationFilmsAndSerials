@@ -1,22 +1,28 @@
-﻿@model List<ApplicationFilmsAndSerials.Models.Films>
+﻿@model ApplicationFilmsAndSerials.Models.VideosViewModel
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>All Videos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/videos.css"> <!-- Подключаем CSS -->
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Movies</h1>
+    @* <header class="header">
+        <h1>Movies and TV Shows</h1>
+    </header> *@
+
+    <div class="content-container">
+        <!-- Фильмы -->
+        <h1 class="mb-4 text-center">Movies</h1>
         <div class="row">
-            @foreach (var film in Model)
+            @foreach (var film in Model.Films)
             {
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <video controls class="card-img-top">
+                <div class="col-md-4 col-lg-3 col-sm-6">
+                    <div class="movie-card">
+                        <video controls>
                             <source src="@film.VideoPath" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
@@ -25,8 +31,34 @@
                             <p class="card-text">
                                 Release Date: @film.ReleaseDate.ToString("yyyy-MM-dd")<br>
                                 Genre: @film.Genre.Name<br>
-                                Age Limit: @film.AgeLimit+<br>
+                                Age Limit: @film.AgeLimit<br>
                                 Rating: @film.Rating
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Сериалы -->
+        <h1 class="mb-4 text-center">Series</h1>
+        <div class="row">
+            @foreach (var serial in Model.Serials)
+            {
+                <div class="col-md-4 col-lg-3 col-sm-6">
+                    <div class="movie-card">
+                        <video controls>
+                            <source src="@serial.VideoPath" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">@serial.Title</h5>
+                            <p class="card-text">
+                                Release Date: @serial.ReleaseDate.ToString("yyyy-MM-dd")<br>
+                                Genre: @serial.Genre.Name<br>
+                                Age Limit: @serial.AgeLimit<br>
+                                Rating: @serial.Rating<br>
+                                Season: @serial.SeasonNumber, Episode: @serial.EpisodeNumber
                             </p>
                         </div>
                     </div>

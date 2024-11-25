@@ -1,15 +1,23 @@
-﻿body {
+﻿/* Основные стили для фона и текста */
+body {
     background: linear-gradient(to right, #141e30, #243b55);
     color: #ffffff;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh; /* Высота страницы на весь экран */
+    display: flex;
+    flex-direction: column;
 }
 
+/* Стили для заголовка */
 .header {
     background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
     .header h1 {
@@ -17,10 +25,14 @@
         margin: 0;
     }
 
+/* Контейнер для контента */
 .content-container {
+    flex: 1; /* Контейнер занимает всю оставшуюся высоту */
     padding: 20px;
+    margin-top: 20px;
 }
 
+/* Карточки фильмов и сериалов */
 .movie-card {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -28,12 +40,14 @@
     margin-bottom: 20px;
     padding: 15px;
     text-align: center;
+    height: 100%; /* Занимает полную высоту */
 }
 
-    .movie-card img {
+    .movie-card video {
         border-radius: 10px;
-        max-width: 100%;
+        width: 100%; /* Видео занимает всю ширину карточки */
         height: auto;
+        max-height: 300px; /* Ограничение по высоте */
     }
 
     .movie-card h5 {
@@ -59,3 +73,11 @@
         .movie-card button:hover {
             background-color: #e64a19;
         }
+
+/* Сетка для адаптивности */
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Карточки переносятся на новую строку, если не помещаются */
+    gap: 20px; /* Промежутки между карточками */
+    justify-content: center; /* Центровка карточек */
+}

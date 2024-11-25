@@ -19,7 +19,16 @@ namespace ApplicationFilmsAndSerials.Controllers
         public IActionResult MainPage()
         {
             var films = _context.Films.Include(f => f.Genre).ToList();
-            return View("~/Views/VideosPage/AllVideos.cshtml", films);
+            var serials = _context.Serials.Include(s => s.Genre).ToList();
+
+            // Создаём ViewModel
+            var viewModel = new VideosViewModel
+            {
+                Films = films,
+                Serials = serials
+            };
+
+            return View("~/Views/VideosPage/AllVideos.cshtml", viewModel);
         }
         
     }
