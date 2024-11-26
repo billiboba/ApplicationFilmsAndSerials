@@ -1,38 +1,20 @@
-﻿/* Основные стили для фона и текста */
-body {
+﻿body {
     background: linear-gradient(to right, #141e30, #243b55);
     color: #ffffff;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Высота страницы на весь экран */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Стили для заголовка */
-.header {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-    .header h1 {
-        font-size: 3rem;
-        margin: 0;
-    }
-
-/* Контейнер для контента */
 .content-container {
-    flex: 1; /* Контейнер занимает всю оставшуюся высоту */
+    flex: 1;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 90vh;
 }
 
-/* Карточки фильмов и сериалов */
 .movie-card {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -40,14 +22,14 @@ body {
     margin-bottom: 20px;
     padding: 15px;
     text-align: center;
-    height: 100%; /* Занимает полную высоту */
+    height: 100%;
 }
 
     .movie-card video {
         border-radius: 10px;
-        width: 100%; /* Видео занимает всю ширину карточки */
+        width: 100%; 
         height: auto;
-        max-height: 300px; /* Ограничение по высоте */
+        max-height: 300px; 
     }
 
     .movie-card h5 {
@@ -60,24 +42,64 @@ body {
         margin: 10px 0;
     }
 
-    .movie-card button {
-        background-color: #ff5722;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-        .movie-card button:hover {
-            background-color: #e64a19;
-        }
-
-/* Сетка для адаптивности */
 .row {
     display: flex;
-    flex-wrap: wrap; /* Карточки переносятся на новую строку, если не помещаются */
-    gap: 20px; /* Промежутки между карточками */
-    justify-content: center; /* Центровка карточек */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
+.filter-container {
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(to right, #141e30, #243b55);
+    padding: 15px 20px;
+    border-bottom: 0px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+    .filter-container .form-label {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .filter-container .form-select,
+    .filter-container .btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #ffffff;
+        box-shadow: none;
+    }
+
+        .filter-container .form-select:focus,
+        .filter-container .btn:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+    .filter-container .btn-primary {
+        background: #1e90ff;
+        transition: background 0.3s ease;
+    }
+
+        .filter-container .btn-primary:hover {
+            background: #1c86ee;
+        }
+
+
+    .filter-container .form-select {
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        box-shadow: none;
+    }
+
+        .filter-container .form-select option {
+            color: #000000;
+            background-color: #ffffff;
+        }
+
+        .filter-container .form-select:focus {
+            outline: none; 
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }

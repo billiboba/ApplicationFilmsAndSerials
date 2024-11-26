@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApplicationFilmsAndSerials.Migrations
 {
     [DbContext(typeof(FilmsAndSerialsContext))]
-    [Migration("20241125193011_InitialCreate")]
+    [Migration("20241126081856_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -125,9 +125,6 @@ namespace ApplicationFilmsAndSerials.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DayOfBirthday")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()

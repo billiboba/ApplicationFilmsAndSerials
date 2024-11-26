@@ -16,7 +16,7 @@ namespace ApplicationFilmsAndSerials.Controllers
         {
             return View("~/Views/HomePage/Authentication.cshtml");
         }
-        public IActionResult SignUp(string name, string email,string password, DateTime dayOfBirthday)
+        public IActionResult SignUp(string name, string email,string password)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -33,7 +33,6 @@ namespace ApplicationFilmsAndSerials.Controllers
             {
                 Name = name,
                 Email = email,
-                DayOfBirthday = dayOfBirthday,
                 Password = password
             };
             _context.Users.Add(user); 

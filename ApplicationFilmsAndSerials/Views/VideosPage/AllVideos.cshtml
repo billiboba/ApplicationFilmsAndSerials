@@ -10,38 +10,89 @@
     <link rel="stylesheet" href="/css/videos.css"> <!-- Подключаем CSS -->
 </head>
 <body>
-    @* <header class="header">
-        <h1>Movies and TV Shows</h1>
-    </header> *@
-
+    <div class="filter-container">
+        <form method="get" action="/Videos/Filter">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <label for="type" class="form-label">Type</label>
+                    <select class="form-select" id="type" name="type">
+                        <option value="" selected>All</option>
+                        <option value="films">Films</option>
+                        <option value="serials">Serials</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="ageLimit" class="form-label">Age Limit</label>
+                    <select class="form-select" id="ageLimit" name="ageLimit">
+                        <option value="" selected>All</option>
+                        <option value="0">0+</option>
+                        <option value="6">6+</option>
+                        <option value="12">12+</option>
+                        <option value="14">14+</option>
+                        <option value="16">16+</option>
+                        <option value="18">18+</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <select class="form-select" id="genre" name="genre">
+                        <option value="" selected>All</option>
+                        @foreach (var genre in Model.Genres)
+                        {
+                            <option value="@genre.Id">@genre.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="content-container">
         <!-- Фильмы -->
-        <h1 class="mb-4 text-center">Movies</h1>
+        @* <div class="section-header">
+            <h1 class="mb-4 text-center">Movies</h1>
+        </div> *@
         <div class="row">
             @foreach (var film in Model.Films)
             {
-                <div class="col-md-4 col-lg-3 col-sm-6">
-                    <div class="movie-card">
-                        <video controls>
-                            <source src="@film.VideoPath" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="card-body">
+                @if (film.AgeLimit > 18)
+                {
+                    <div class="col-md-4 col-lg-3 col-sm-6">
+                        <div class="movie-card">
                             <h5 class="card-title">@film.Title</h5>
-                            <p class="card-text">
-                                Release Date: @film.ReleaseDate.ToString("yyyy-MM-dd")<br>
-                                Genre: @film.Genre.Name<br>
-                                Age Limit: @film.AgeLimit<br>
-                                Rating: @film.Rating
-                            </p>
+                            <p class="card-text text-warning">This content is restricted to users 18 and older.</p>
                         </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="col-md-4 col-lg-3 col-sm-6">
+                        <div class="movie-card">
+                            <video controls>
+                                <source src="@film.VideoPath" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="card-body">
+                                <h5 class="card-title">@film.Title</h5>
+                                <p class="card-text">
+                                    Release Date: @film.ReleaseDate.ToString("yyyy-MM-dd")<br>
+                                    Genre: @film.Genre.Name<br>
+                                    Age Limit: @film.AgeLimit<br>
+                                    Rating: @film.Rating
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
         </div>
 
         <!-- Сериалы -->
-        <h1 class="mb-4 text-center">Series</h1>
+        @* <div class="section-header">
+            <h1 class="mb-4 text-center">Series</h1>
+        </div> *@
         <div class="row">
             @foreach (var serial in Model.Serials)
             {
